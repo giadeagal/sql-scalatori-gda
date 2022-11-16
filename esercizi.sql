@@ -15,7 +15,7 @@ FROM
 /*
 2
 Per ogni scalatore nato prima del 1980, calcolare tutti i continenti in cui ha effettuato una scalata, ordinando il risultato per codice fiscale e, a parità di codice fiscale, per il nome del continente.*/
-SELECT 
+SELECT DISTINCT
     SR.cf AS scalatore,
     N.nome AS continente
 FROM 
@@ -24,8 +24,6 @@ FROM
         ON SR.cf = ST.scalatore 
     JOIN nazione AS N
         ON ST.nazione = N.nome
-GROUP BY
-    SR.cf, N.nome
 ORDER BY  
     SR.cf
 
