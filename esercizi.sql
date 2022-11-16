@@ -2,7 +2,8 @@
 1
 Calcolare l'insieme (non il multi-insieme) delle coppie (A,B) tali che A è uno scalatore e B è un continente in cui A ha effettuato una scalata.*/
 
-SELECT DISTINCT SR.cf, N.continente
+SELECT DISTINCT SR.cf AS scalatore,
+    N.continente
 FROM scalata AS ST
     JOIN scalatore AS SR
         ON SR.cf = ST.scalatore 
@@ -12,6 +13,15 @@ FROM scalata AS ST
 /*
 2
 Per ogni scalatore nato prima del 1980, calcolare tutti i continenti in cui ha effettuato una scalata, ordinando il risultato per codice fiscale e, a parità di codice fiscale, per il nome del continente.*/
+SELECT DISTINCT SR.cf AS scalatore,
+    N.nome AS continente
+FROM scalata AS ST
+    JOIN scalatore AS SR
+        ON SR.cf = ST.scalatore 
+    JOIN nazione AS N
+        ON ST.nazione = N.nome
+GROUP BY SR.cf, N.nome
+ORDER BY SR.cf
 
 /*
 3
