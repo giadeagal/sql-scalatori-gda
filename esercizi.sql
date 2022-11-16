@@ -100,7 +100,24 @@ WHERE
 
 /*
 7
-Per ogni nazione e per ogni anno, calcolare il numero di scalate effettuate in quella nazione e in quell’anno, ma solo se tale numero è maggiore di 1. Nel risultato le nazioni dello stesso continente devono essere mostrati in tuple contigue, e le tuple relative allo stesso continente devono essere ordinate per anno.*/
+Per ogni nazione e per ogni anno, calcolare il numero di scalate effettuate in quella nazione e in quell’anno Nel risultato le nazioni dello stesso continente devono essere mostrati in tuple contigue, e le tuple relative allo stesso continente devono essere ordinate per anno.*/
+
+SELECT
+N.nome,
+ST.anno,
+count(N.nome) AS scalatenaz,
+count(ST.*) AS scalateanno
+FROM 
+    scalatore AS SR
+    JOIN scalata AS ST 
+        ON SR.cf = ST.scalatore
+    JOIN nazione AS N
+        ON ST.nazione = N.nome
+GROUP BY 
+    N.nome, N.continente, ST.nazione, ST.anno
+ORDER BY 
+    N.continente, ST.anno DESC
+        
 
 /*
 8
