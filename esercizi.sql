@@ -40,6 +40,16 @@ WHERE (ST.anno - SR.annonascita) < 18
 4
 Per ogni nazione, calcolare il numero di scalate effettuate da scalatori nati in quella nazione.*/
 
+SELECT N.nome AS nazione,
+    count(*) AS numScalatoriNati
+FROM scalata AS ST
+    JOIN scalatore AS SR
+        ON SR.cf = ST.scalatore 
+    JOIN nazione AS N
+        ON ST.nazione = N.nome
+WHERE ST.nazione = SR.nazionenascita
+GROUP BY N.nome
+
 /*
 5
 Per ogni continente, calcolare il numero di scalate effettuate da scalatori nati in una nazione di quel continente.*/
